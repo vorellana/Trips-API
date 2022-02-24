@@ -1,7 +1,7 @@
 const request = require('supertest')
 const mongoose = require('mongoose');
 const app = require('../src/app')
-const { testReadings1 } = require('../tests/testData')
+const { testReadings1 } = require('./testData')
 const baseV1 = '/api/trips/v1';
 const baseV2 = '/api/trips/v2';
 

@@ -31,29 +31,4 @@ const TripSchema = new Schema({
     ]
 })
 
-
-// const TripSchema = new Schema({
-//     id: {
-//         type: Schema.Types.ObjectId,
-//         index: true,
-//         require: true,
-//         auto: true
-//     },
-//     comment: String,
-//     code: String,
-//     force: Number,
-//     element: {
-//         name: String,
-//         age: Number
-//     },
-//     pets: [
-//         {
-//             _id: false,
-//             name: String,
-//             age: Number
-//         }
-//     ]
-
-// })
-
 module.exports = model('trips', TripSchema);

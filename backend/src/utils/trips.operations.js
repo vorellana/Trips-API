@@ -1,16 +1,16 @@
 const exp = {};
 const NodeGeocoder = require('node-geocoder');
-
+const config = require('../config');
 const optionsNg = {
     provider: 'google',  
     // fetch: customFetchImplementation,
-    apiKey: 'AIzaSyBOvBaUjXyNALkd7L2MttHK7ZAfQnhquQs',
+    apiKey: config.apiKey,
     formatter: null
 };
 
 const geocoder = NodeGeocoder(optionsNg);
 
-const getStartEnd = async (readings) => {    
+const getStartEnd = async (readings) => {
     readings.sort((a,b) => (a.time > b.time) ? 1 : ((b.time > a.time) ? -1 : 0))
     const startLocation = await geocoder.reverse({ 
         lat: readings[0].location.lat, 
