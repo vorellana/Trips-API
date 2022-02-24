@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-
 const TripSchema = new Schema({
     id: {
         type: Schema.Types.ObjectId,

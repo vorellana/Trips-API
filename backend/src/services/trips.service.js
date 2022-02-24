@@ -5,7 +5,9 @@ const { generateTrip } = require('../utils/trips.operations')
 exp.getTrips = async (query) => {
     const limit = parseInt(query.limit);
     const offset = parseInt(query.offset);
-    const trips = await Trip.find({}).sort({'id': -1}).skip(offset).limit(limit);
+    const trips = await Trip.find({}).sort({'id': -1}).skip(offset).limit(limit).select({
+        id: 1, start: 1, end: 1, distance: 1 , duration: 1, overspeedsCount: 1, boundingBox: 1, _id: 0
+    });
     const totalCount = await Trip.count();
     const totalPages = Math.ceil(totalCount / limit);
     const currentPage = Math.ceil(offset / limit);
