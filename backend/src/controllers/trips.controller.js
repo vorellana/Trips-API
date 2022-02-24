@@ -1,43 +1,52 @@
 const exp = {};
 const { getTrips, createTrip } = require('../services/trips.service')
+const { validateTrip } = require('../utils/trips.operations')
 
 exp.getTrips = async (req, res) => {
-
-    // console.log("gettrips 001");
-    // infoJson = {
-    //     name : "victor",
-    //     age : 10
-    // }
-    // res.json(infoJson);
-    let trips = await getTrips();
-    res.json(trips)
+    const query = require('url').parse(req.url, true).query;
+    let response
+    try {
+        response = await getTrips(query);    
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(404).json({
+            error: {
+                statusCode: 404,
+                errorCode: 0,
+                srcMessage: "-",
+                translatedMessage: error.message
+            }
+        });
+    }
 }
 
-
 exp.createTrip = async (req, res) => {
-
-    // // // // const NodeGeocoder = require('node-geocoder');
-
-    // // // // const options = {
-    // // // //   provider: 'google',
-    
-    // // // //   // Optional depending on the providers
-    // // // //   // fetch: customFetchImplementation,
-    // // // //   apiKey: 'AIzaSyBOvBaUjXyNALkd7L2MttHK7ZAfQnhquQs', // for Mapquest, OpenCage, Google Premier
-    // // // //   formatter: null // 'gpx', 'string', ...
-    // // // // };
-    
-    // // // // const geocoder = NodeGeocoder(options);
-    // // // // // -12.06638206274529, -75.21709415659676
-    // // // // const respo = await geocoder.reverse({ lat: -12.06638206274529, lon: -75.21709415659676 });
-    
-    // // // // console.log(respo);
-
-    let response = await createTrip(req.body);
-    res.json(response);
-    // res.json({
-    //     message: "post successful"
-    // })
+    let response;
+    try {
+        let { success, message } = await validateTrip(req.body)
+        if ( success ){
+            response = await createTrip(req.body);    
+            res.status(200).json(response);
+        } else {
+            res.status(422).json({
+                error: {
+                    statusCode: 422,
+                    errorCode: 0,
+                    srcMessage: "Invalid attribute",
+                    translatedMessage: message // "Atributo inválido"
+                }
+            });
+        }        
+    } catch (error) {
+        res.status(404).json({
+            error: {
+                statusCode: 404,
+                errorCode: 0,
+                srcMessage: "-",
+                translatedMessage: error.message
+            }
+        });
+    }
 }
 
 module.exports = exp;

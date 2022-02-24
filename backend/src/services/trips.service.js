@@ -2,27 +2,30 @@ const exp = {};
 const Trip = require('../models/trips');
 const { generateTrip } = require('../utils/trips.operations')
 
-exp.getTrips = async () => {
-    let trips = await Trip.find({});
-    return trips;
+exp.getTrips = async (query) => {
+    const limit = parseInt(query.limit);
+    const offset = parseInt(query.offset);
+    const trips = await Trip.find({}).sort({'id': -1}).skip(offset).limit(limit);
+    const totalCount = await Trip.count();
+    const totalPages = Math.ceil(totalCount / limit);
+    const currentPage = Math.ceil(offset / limit);
+    const response = {
+        pagination: {
+            total: totalCount,
+            page: currentPage,
+            pages: totalPages
+        },
+        data: trips,
+    }
+    return response;
 }
 
-
 exp.createTrip = async (body) => {
-
-    // let newTrip = new Trip({ comment: "cuatro"});
-    // let newTrip = new Trip(body);
-
-    // let response = await newTrip.save();
-    // await newTrip.save();
-
-    let jsonTrip = await generateTrip(body);
-    let newTrip = new Trip(jsonTrip);
-
-    await newTrip.save();
-
-    let response = { message: "create Trip successful"};
-    return response;
+    const jsonTrip = await generateTrip(body);
+    const newTrip = new Trip(jsonTrip);
+    const resSave = await newTrip.save();
+    const jsonResponse = Object.assign({id: resSave.id.toString()}, jsonTrip);
+    return jsonResponse;
 }
 
 module.exports = exp;

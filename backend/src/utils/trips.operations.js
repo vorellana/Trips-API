@@ -36,7 +36,7 @@ const getStartEnd = async (readings) => {
 }
 
 exp.generateTrip = async (body) => {
-    let readings = body.readings
+    const readings = body.readings
     let { start, end } = await getStartEnd(readings);
     let distance = Math.sqrt(Math.pow((end.lat - start.lat), 2) + Math.pow((end.lon - start.lon), 2));
     let duration = end.time - start.time;
@@ -58,6 +58,27 @@ exp.generateTrip = async (body) => {
         boundingBox:boundingBox
     }
     return trip;
+}
+
+exp.validateTrip = async (body) => {
+    const readings = body.readings
+    let success = false;
+    let message = '';
+    let withoutTime = false;
+    readings.forEach(item => {
+        if (item.time === undefined){
+            withoutTime = true;
+            return;
+        }            
+    });
+    if ( withoutTime ) {
+        message = 'Todos los readings deben tener la propiedad time';
+    } else if (readings.length < 5 ){
+        message = 'Para construir el viaje deben haber por lo menos 5 readings';
+    } else {
+        success = true
+    }
+    return { success, message };
 }
 
 module.exports = exp;
