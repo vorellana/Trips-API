@@ -15,4 +15,8 @@ router.post(baseV1, morgan('combined'), createTrip);
 router.get(baseV2, [morgan('combined'), verifyToken],  getTrips);
 router.post(baseV2, [morgan('combined'), verifyToken], createTrip);
 
+router.get('/info', (req, res) => {
+    res.status(200).json({message: "hola"})
+} );
+
 module.exports = router;
