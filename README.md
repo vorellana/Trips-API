@@ -98,9 +98,9 @@ Copie el siguiente código Json y péguelo en el body de entrada en su cliente H
 cd backend
 
 # y ejecutamos el **test** para la pruebas unitarias con **jest**
-cd npm run test
+npm run test
 ```
-**Nota:**Para ver los resultados revise las imágenes al inicio de éste documento.
+**Nota:** Para ver los resultados revise las imágenes al inicio de éste documento.
 
 ### Despliegue en Heroku
 
@@ -118,7 +118,7 @@ https://trips-api-vo.herokuapp.com/api/trips/v2?start_gte=5&start_lte=100&distan
 # POST V2
 https://trips-api-vo.herokuapp.com/api/trips/v2
 ```
-**Importante:**La versión 2 (V2) de las APIs cuentan con seguridad por token por lo cual es necesario colocar el siguiente token como headers. 
+**Importante:** La versión 2 (V2) de las APIs cuentan con seguridad por token por lo cual es necesario colocar el siguiente token como headers. 
 ```sh
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.MSqeevVdGlsk-I0bn1VkqmbE1t9e87OD7rkYvtQQAsk
 ```
