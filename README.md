@@ -37,7 +37,7 @@ En el cliente HTTP establecemos el método POST e ingresamos la siguiente URL
 http://localhost:3000/api/trips/v1
 ```
 
-Copie el siguiente código Json y péguelo en el body de entrada en su cliente HTTP despues ejecute la llamada (para ver lo resultados revise la imagén al inicio de éste documento).
+Copie el siguiente código Json y péguelo en el body de entrada en su cliente HTTP después ejecute la llamada (para ver lo resultados revise la imagén al inicio de éste documento).
 
 ```
 {
@@ -117,8 +117,6 @@ https://trips-api-vo.herokuapp.com/api/trips/v2?start_gte=5&start_lte=100&distan
 
 # POST V2
 https://trips-api-vo.herokuapp.com/api/trips/v2
-
-cd npm run test
 ```
 **Importante:**La versión 2 (V2) de las APIs cuentan con seguridad por token por lo cual es necesario colocar el siguiente token como headers. 
 ```sh
@@ -126,4 +124,43 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiw
 ```
 **Nota:** La versión 2 (V2) de las APIs que cuentan con seguridad también está implementada en la versión para docker.
 
+## Tecnologías de desarrollo
+Para el presente proyecto se utilizarón las siguientes tecnologías como librerías, frameworks, servicios en la nube, herramientas de despliegue entre otros.
 
+### Backend
+*  **Node.js:** Entorno en tiempo de ejecución para desarrollar el Backend en Javascript.
+* **Express:** Framework e infraestructura web rápida, minimalista y flexible para Node.js. 
+* **ESLint:** Herramienta para el análisis de código (corrige y sugiere buenas prácticas).
+* **Mongoose:** Módulo para la conexión como cliente a MongoDB.
+* **jsonwebtoken:** Implementación de JSON web Token para Node.js.
+* **Nodemon:** Aplicación para reiniciar el servidor automáticamente después de cada cambio.
+* **Morgan:** Middleware para ver por consola las peticiones HTTP.
+* **node-geocoder:** Librería para geocodificación (trabaja sobre google maps).
+### Database
+*  **MongoDB:** Base de datos NoSQL orientado a documentos.
+
+### Deployment
+*  **Docker:** Tecnología de contenedores que posibilita la creación y el uso de contenedores.
+*  **Docker Compose:** Herramienta que permite simplificar el uso de Docker y gestionar varios contenedores.
+*  **GitHub**: Servicio de repositorio de código fuente en donde se encuentran almacenados todo el código del proyecto.
+*  **Heroku**: Servicio en la nube para desplegar aplicaciones (se publicó una versión especial del proyecto en éste servicio)
+*  **MongoDB Atlas**: Servicio en la nube de Base de Datos MongoDB (se publicó una versión especial de la base de datos en éste servicio)
+## Características (lo requerido)
+* La aplicación tiene implementada la API V1 con los métodos GET Y POST.
+* El método GET tiene parámetos de filtros de búsqueda.
+* El método GET tiene parámetos de paginación.
+* El método POST genera un Trip a partir de los Readings de entrada.
+* Los "Trips" generados cuentan con todos los campos requeridos.
+* El campo "address" de "Trip" es obtenido a partir de la coordenadas.
+* El campo "distance" de "Trip" es calculado a partir de la fórmula de distancia entre 2 puntos en un plano cartesiano.
+* Se implementaron los test unitarios con la libreía jest.
+* Se configuró la orquestación del despliegue con dockerfile y docker-compose.
+## Mejoras
+* La aplicación tiene implementada la API V2 con los métodos GET Y POST y cuenta con un mecanismo de seguridad por token (jwt).
+* La respuesta del método GET contiene un objeto adicional "Pagination" para el manejo retroalimentativo de paginación.
+* Se implementó un mayor manejo de errores con su respectivas respuestas para el cliente HTTP.
+* Se desplegó una version especial de las APIs en Heroku.
+* Se desplegó una version especial de la Base de Datos en MongoDB Atlas.
+* La estructura principal del proyecto se maneja en 3 capas: routes,controlles y services.
+* La Base de Datos que se despliega con Docker contiene datos por defecto para su rápido uso.
+* El despliegue del Backend y Base de Datos en contenedores se realiza con un solo comando de docker-compose.
