@@ -164,3 +164,5 @@ Para el presente proyecto se utilizarón las siguientes tecnologías como librer
 * La estructura principal del proyecto se maneja en 3 capas: routes,controlles y services.
 * La Base de Datos que se despliega con Docker contiene datos por defecto para su rápido uso.
 * El despliegue del Backend y Base de Datos en contenedores se realiza con un solo comando de docker-compose.
+
+Gracias
