@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 const config = require('../src/config');
 const port = config.port; //QUITAR ESTO
 // const strConnection = 'mongodb+srv://vorellana:Trips$2022@cluster0.ubpkb.mongodb.net/tripsdb'; // quitar esto
-const strConnection = config.connectionDb;
+// const strConnection = config.connectionDb;
+
+const strConnection = `mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB}@${process.env.HOST_DB}/${process.env.NAME_DB}`;
 
 // ***** connection to DB (MongoDB)*****
 mongoose.connect(strConnection, {
